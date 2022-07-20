@@ -1,3 +1,3 @@
-const exemplo = require('./src/exemplo')
+const exemplo = require('./src/exemplo2')
 
 exemplo.main()
