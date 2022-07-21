@@ -12,11 +12,11 @@ console.log(`${label} levou ${Date.now() - startTime}ms`)
 
 const copyFileBlocking = (source, dest) =>{
 const startTime = Date.now();
-    console.log("Lendo blocking conteúdo")
+    console.log("> Lendo blocking conteúdo")
     const content = readFileSync(source)
-    console.log("Escrevendo blocking conteúdo")
+    console.log(">> Escrevendo blocking conteúdo")
     writeFileSync(dest, content)
-    logDuration('copyFileBlocking', startTime)
+    logDuration('>>> copyFileBlocking', startTime)
 }
 
 
@@ -26,7 +26,7 @@ const destPath = join(__dirname,
                     'example.copy.blocking.txt')
 
 copyFileBlocking(sourcePath, destPath)
-console.log("Cópia blocking foi realizada com sucesso!");
+console.log(">>>> Cópia blocking foi realizada com sucesso!");
 
 
 console.log('*'.repeat(50))
@@ -35,14 +35,14 @@ console.log('*'.repeat(50))
 const copyFileNonBlocking = (source, dest) =>{
 
     const startTime = Date.now();
-    console.log("Começou a cópia non-blocking");
+    console.log("> Começou a cópia non-blocking");
     
     readFile(source, (_err, data) =>{
-        console.log("Terminou de ler non-blocking");
+        console.log(">> Terminou de ler non-blocking");
             writeFile(dest, data, (_err) =>{
-                console.log("Terminou de escrever non-blocking")
+                console.log(">>> Terminou de escrever non-blocking")
             
-                logDuration('copyFileNonBlocking', startTime)
+                logDuration('>>>> copyFileNonBlocking', startTime)
             
             })
     })
