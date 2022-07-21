@@ -19,21 +19,14 @@ const startTime = Date.now();
     logDuration('>>> copyFileBlocking', startTime)
 }
 
-
 const sourcePath = join(__dirname, 'files', 'example.txt')
 const destPath = join(__dirname,
                     'files', 
                     'example.copy.blocking.txt')
-
 copyFileBlocking(sourcePath, destPath)
 console.log(">>>> Cópia blocking foi realizada com sucesso!");
-
-
 console.log('*'.repeat(50))
-
-
 const copyFileNonBlocking = (source, dest) =>{
-
     const startTime = Date.now();
     console.log("> Começou a cópia non-blocking");
     
