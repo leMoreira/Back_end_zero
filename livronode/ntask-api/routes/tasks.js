@@ -1,9 +1,13 @@
 module.exports = app =>{
-    const tasks = app.models.tasks;
+    const Tasks = app.models.tasks;
 
-    app.get('/tasks', (req, res) =>{
-        tasks.findAll({}, (tasks) =>{
+    app.get('/tasks', async (req, res) =>{
+
+        try{
+            const tasks = await Tasks.findAll();
             res.json({tasks});
-        });
-    });
+        } catch (err){
+            res.status(500).json(err);
+        }
+     });
 };
