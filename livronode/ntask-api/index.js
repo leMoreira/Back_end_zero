@@ -1,20 +1,13 @@
 const express = require("express");
 const consign = require('consign')
 
-const PORT = 3000;
-const app = express();
 
-app.set('json spaces', 4)
+const app = express();
 
 consign()
     .include('models')
+    .then('middlewares.js')
     .then('routes')
-    .into(app);
-
-
-
-
-app.listen(PORT, () =>{
-    console.log(`Ntask API - porta ${PORT}`);
-});
+    .then('boot.js')
+    .into(app)
 
