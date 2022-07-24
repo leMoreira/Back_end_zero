@@ -11,7 +11,7 @@ module.exports = (app) => {
             type: DataTypes.STRING,
             allowNull: false,
             validate:{
-                noEmpty:true
+                notEmpty:true
             }
         },
         done: {

@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-
+const bcrypt = require('bcrypt')
 module.exports = (app) =>{
     const Users = app.db.define('Users', {
         id:{
@@ -11,14 +11,19 @@ module.exports = (app) =>{
             type: DataTypes.STRING,
             allowNull: false,
             validate:{
-                noEmpty: true
+                notEmpty: true
             }
         },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
             validate:{
-                noEmpty:true
+                notEmpty:true
+            },
+            set(value){
+                const salt = bcrypt.genSaltSync();
+                const password = bcrypt.hashSync(value, salt);
+                this.setDataValue('password', password);
             }
         },
         email: {
@@ -26,7 +31,7 @@ module.exports = (app) =>{
             unique: true,
             allowNull: false,
             validate: {
-                noEmpty: true
+                notEmpty: true
             }
         }
     });
