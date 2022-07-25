@@ -1,6 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 
+require('dotenv').config();
 
 module.exports = app => {
   async function start(port) {
