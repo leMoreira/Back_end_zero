@@ -1,7 +1,5 @@
-const https = require('https');
-const fs = require('fs');
 
-require('dotenv').config();
+
 
 module.exports = app => {
   async function start(port) {
@@ -9,8 +7,8 @@ module.exports = app => {
       await app.db.authenticate();
       await app.db.sync();
       if (process.env.NODE_ENV !== 'test') {
-        const server = https.createServer(certs, app);
-        server.listen(port, () => {
+        
+        app.listen(port, () => {
           console.log(`NTask API - porta ${port}`);
         });
       }

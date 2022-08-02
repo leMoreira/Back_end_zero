@@ -13,12 +13,14 @@ const destPath = join(__dirname, 'pakage.copy.promise.json');
 
 const notExistsPath = join(__dirname, 'arquivo-nao-existe.json');
 
-readFile(packageJsonPath)
+readFile(notExistsPath)
 .catch((error) =>{
-    console.error("Deu erro, usando o valor padrão ", error.message)
-    return '{"message: "oooops"}'
+    console.error("Deu erro, to logando para avisar, mas vou deixar subir ", error.message)
+    //return '{"message: "oooops"}'
+    //return readFile(packageJsonPath)
+    return Promise.reject(error)
 })
-    .then((data) =>{
+    .then((data) =>{ // valor puro que você retornou ou dado promise  fulfilled
         console.log(data)
         console.log("Terminou de ler")
    return  writeFile(destPath, data)
@@ -35,6 +37,53 @@ readFile(packageJsonPath)
 })
 
 
+
+console.log('*'.repeat(20))
+Promise.resolve(
+    // valor puro
+    // outra promise
+)
+let cachedContent = null
+
+const readPackageJson = () =>{
+    console.log('Vou ler o arquivo')
+return readFile(packageJsonPath, { encoding: 'utf8'}).then(data =>{
+    console.log('Eu li o arquivo')
+    cachedContent = data
+    return data
+})
+}
+const getPacjageJsonContent = () => 
+Promise.resolve(
+    cachedContent ?? readPackageJson()
+)
+// getPacjageJsonContent()
+// .then(data => console.log(data))
+// .then(() => getPacjageJsonContent())
+// .then(data => console.log(data))
+
+
+const bagulhoBaseadoEmCallbacks = (param, calback) =>{
+    setTimeout(() =>{
+        calback(undefined, param)
+    }, 1000)
+}
+
+const bagulhoBaseadoEmPromise = param =>
+    new Promise((resolve, reject) =>{
+        bagulhoBaseadoEmCallbacks(param, (error, data) =>{
+
+            if(error){
+                reject(error)
+            } else {
+                resolve(data)
+            }
+
+        })
+    })
+
+    bagulhoBaseadoEmPromise('Será mesmo?')
+    .then((data) => console.log(`${data}\né mesmo heim`))
 
 // const readPromise = redFile(packageJsonPath)
 
