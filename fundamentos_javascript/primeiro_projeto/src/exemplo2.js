@@ -2,6 +2,8 @@ const chark = require('chalk')
 const main = () =>{
     console.log(chark.bgGreen(chark.whiteBright("Fundamentos JavaScript")))
 
+
+    
     let divisor = 'h';
     try{
         if(!isNaN(divisor)){
@@ -13,7 +15,7 @@ const main = () =>{
 
     }catch (error){
         console.log(error);
-    } finally{
+    } finally {
         console.log("Fim")
     }
 

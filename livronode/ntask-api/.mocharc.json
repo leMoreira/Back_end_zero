@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 { 
     "exit": true,
     "require": "test/helpers"
 }
+=======
+{
+    "exit": true,
+    "require": "test/helpers"
+  }
+>>>>>>> a9bf8e899dd3a809ebc987a4500df6bba9db6fe6

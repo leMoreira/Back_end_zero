@@ -1,5 +1,5 @@
 const bodyParser = require('body-parser');
-
+const express = require('express');
 module.exports = app =>{
     app.set('port', 3000);
     app.set('json spaces', 4);
@@ -9,4 +9,6 @@ module.exports = app =>{
         delete req.body.id;
         next();
     });
+    app.use(express.static('public'));
+    
 };
