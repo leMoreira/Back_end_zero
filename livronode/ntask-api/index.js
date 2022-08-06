@@ -4,7 +4,7 @@ const consign = require('consign')
 
 const app = express();
 
-consign()
+consign({ verbose: false })
     .include('db.js')
     .then('models')
     .then('associations.js')
