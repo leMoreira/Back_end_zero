@@ -1,6 +1,15 @@
 const { Router } = require('express')
+const { TodosRepository } = require('./repository')
+const logger = require('../middlewares/logger')
+
 
 const router = Router();
+//router.use(logger())
+
+// middlewares
+
+
+// fim dos middlewares
 
 /**********
  * TODOS API
@@ -14,7 +23,7 @@ const NotFound ={
 }
 
 // Pegar todos os dados
-router.get('/todos', async (req, res) =>{
+router.get('/', async (req, res) =>{
   const todos = await todosRepository.list();
   if (!todos ){
     res.status(404).send(NotFound)
@@ -26,7 +35,7 @@ res.status(200).send(todos);
 })
 
 //GET pegar uma
-router.get('/todos/:id', async (req, res) =>{
+router.get('/:id', async (req, res) =>{
 
   const id = parseInt(req.params.id)
 
@@ -42,7 +51,7 @@ router.get('/todos/:id', async (req, res) =>{
 
 })
 //POST
-router.post('/todos', async  (req, res) => {
+router.post('/', async  (req, res) => {
   const todo = req.body
   const inserted = await todosRepository.insert(todo)
     res
@@ -54,7 +63,7 @@ router.post('/todos', async  (req, res) => {
 
 //PUT
 
-router.put('/todos/:id', async (req, res) =>{
+router.put('/:id', async (req, res) =>{
   const id = parseInt(req.params.id);
   const todo = {...req.body, id}
 
@@ -70,7 +79,7 @@ router.put('/todos/:id', async (req, res) =>{
 
 
 //DELETE
-router.delete('/todos/:id', async (req, res) =>{
+router.delete('/:id', async (req, res) =>{
   const id = parseInt(req.params.id);
   const found = await todosRepository.get(id)
   if(!found){
@@ -88,3 +97,4 @@ router.delete('/todos/:id', async (req, res) =>{
  * FIM DO TODOS API
  */
 
+module.exports = router;

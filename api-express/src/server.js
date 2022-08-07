@@ -1,9 +1,19 @@
 const express = require('express')
-const {TodosRepository} = require("./todos/repository")
+const hello = require('./hello/routes')
+const todos = require('./todos/routes')
+const logger = require('./middlewares/logger')
+const errorHandler = require('./middlewares/error')
 const app = express()
-const router = express.Router();
+
 
 app.use(express.json())
+app.use(logger());
+app.use('/hello', hello)
+app.use('/todos', todos)
+app.use('/error/sync', () =>{
+  throw new Error('Falhei de propósito sincronamente')
+})
+app.use(errorHandler())
 
 
 

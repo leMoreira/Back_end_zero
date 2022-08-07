@@ -2,11 +2,11 @@ const { Router } = require('express')
 
 const router = Router()
 
-router.get('/hello', (req, res) =>{
+router.get('/', (req, res) =>{
   res.status(200).send("Hello World")
 })
 
-router.get('/hello/:name', (req, res) =>{
+router.get('/:name', (req, res) =>{
 const name = req.params.name
 res.status(200).send(`Hello ${name}`)
 })
